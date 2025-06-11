@@ -1,11 +1,10 @@
-VS Code Setup Guide for SaaS Automation Project
+SaaS Automation Project 🚀
+An AI-Driven Web Automation Framework for SaaS User Management using Playwright, LangChain, and Robocorp.
+
 🚀 Quick Start in VS Code
 Step 1: Initial Setup
 
-Open Terminal in VS Code (Ctrl+``  or View > Terminal)
-Run the setup commands:
-
-bash# Create project directory
+# Create project directory
 mkdir saas-automation
 cd saas-automation
 
@@ -21,7 +20,8 @@ source venv/bin/activate
 # Create directory structure
 mkdir -p src/core src/scrapers src/agents src/utils config data/extracted data/logs tests .vscode
 Step 2: Install Dependencies
-bash# Create requirements.txt
+
+# Create requirements.txt
 cat > requirements.txt << 'EOF'
 playwright==1.40.0
 langchain==0.1.0
@@ -43,7 +43,9 @@ npm init -y
 npm install playwright
 Step 3: VS Code Configuration
 Create .vscode/settings.json:
-json{
+
+
+{
     "python.defaultInterpreterPath": "./venv/bin/python",
     "python.analysis.extraPaths": ["./src"],
     "python.formatting.provider": "black",
@@ -57,7 +59,9 @@ json{
     "python.testing.pytestArgs": ["tests"]
 }
 Create .vscode/launch.json:
-json{
+
+
+{
     "version": "0.2.0",
     "configurations": [
         {
@@ -85,13 +89,15 @@ json{
 }
 Step 4: Essential Files
 Create config/credentials.env:
-env# OpenAI API Key (Get from https://platform.openai.com/api-keys)
+
+
+# OpenAI API Key
 OPENAI_API_KEY=your_openai_api_key_here
 
-# 2Captcha API Key (Optional - Get from https://2captcha.com)
+# 2Captcha API Key
 CAPTCHA_API_KEY=your_2captcha_api_key_here
 
-# Default SaaS Platform Credentials
+# SaaS Platform Credentials
 SAAS_USERNAME=your_username
 SAAS_PASSWORD=your_password
 
@@ -99,7 +105,9 @@ SAAS_PASSWORD=your_password
 HEADLESS=False
 TIMEOUT=30000
 Create config/selectors.yaml:
-yamlplatforms:
+
+
+platforms:
   trello:
     login:
       email_field: 'input[name="user"]'
@@ -112,7 +120,7 @@ yamlplatforms:
       email_selector: '.board-member-email'
       role_selector: '.board-member-role'
       next_button: '.pagination-next'
-  
+
   notion:
     login:
       email_field: 'input[type="email"]'
@@ -125,9 +133,12 @@ yamlplatforms:
       email_selector: '.member-email'
       role_selector: '.member-role'
       next_button: '.load-more'
+
 Step 5: Create Core Files
 Create src/utils/config.py:
-pythonimport os
+
+
+import os
 import yaml
 from dotenv import load_dotenv
 
@@ -141,26 +152,30 @@ class Config:
         self.saas_password = os.getenv('SAAS_PASSWORD')
         self.headless = os.getenv('HEADLESS', 'False').lower() == 'true'
         self.timeout = int(os.getenv('TIMEOUT', 30000))
-        
+
         try:
             with open('config/selectors.yaml', 'r') as file:
                 self.selectors = yaml.safe_load(file)
         except FileNotFoundError:
             self.selectors = {'platforms': {}}
-    
+
     def get_platform_selectors(self, platform_name):
         return self.selectors['platforms'].get(platform_name, {})
 
 config = Config()
-Create empty __init__.py files:
-bashtouch src/__init__.py
+Initialize Python Packages:
+
+
+touch src/__init__.py
 touch src/core/__init__.py
 touch src/scrapers/__init__.py
 touch src/agents/__init__.py
 touch src/utils/__init__.py
+
 Step 6: Test Your Setup
 Create tests/test_setup.py:
-pythonimport unittest
+
+import unittest
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
@@ -174,120 +189,135 @@ class TestSetup(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-Step 7: Install VS Code Extensions
-Install these extensions in VS Code:
 
+Step 7: Install VS Code Extensions
 Python (Microsoft)
+
 Playwright Test for VS Code (Microsoft)
+
 YAML (Red Hat)
+
 Python Docstring Generator (Nils Werner)
+
 GitLens (GitKraken)
 
 Step 8: Run Your First Test
 
-Open VS Code in your project folder:
-bashcode .
+# Open VS Code in your project folder
+code .
 
-Select Python Interpreter:
-
-Press Ctrl+Shift+P
-Type "Python: Select Interpreter"
-Choose ./venv/bin/python (or ./venv/Scripts/python.exe on Windows)
-
-
-Run the demo:
+# Run tests
+python tests/test_setup.py
+Run the Demo:
 
 Press F5 or go to Run > Start Debugging
+
 Select "Run Demo" configuration
 
-
-Run tests:
-bashpython tests/test_setup.py
-
-
-🔧 Development Workflow in VS Code
+🔧 Development Workflow
 Running Code
-
 F5: Run with debugger
+
 Ctrl+F5: Run without debugger
+
 Terminal: python src/main.py
 
 Debugging
+Set breakpoints by clicking to the left of line numbers
 
-Set breakpoints by clicking left of line numbers
-Use Debug Console for variable inspection
+Use Debug Console to inspect variables
+
 Step through code with F10/F11
 
 Testing
+Use Test Explorer in the Activity Bar
 
-Use Test Explorer in Activity Bar
 Run individual tests with right-click
-View test results in Test Output
+
+View results in Test Output
 
 Git Integration
-
 Initialize repo: git init
-Stage changes in Source Control panel
-Commit with meaningful messages
+
+Stage changes via Source Control panel
+
+Commit with clear messages
 
 📋 Daily Development Checklist
 Before Starting
+Activate virtual environment
 
- Activate virtual environment
- Pull latest changes (if using git)
- Check environment variables are set
+Pull latest changes
+
+Verify environment variables
 
 During Development
+Write tests for new features
 
- Write tests for new features
- Use descriptive commit messages
- Keep requirements.txt updated
- Add logging for debugging
+Use clear commit messages
+
+Keep requirements.txt updated
+
+Add logging for debugging
 
 Before Committing
+Run all tests
 
- Run all tests
- Check for sensitive data in commits
- Update documentation
- Verify code formatting
+Check for sensitive data in commits
+
+Update documentation
+
+Verify code formatting
 
 🎯 Next Development Steps
+Start with demo workflow
 
-Start with Demo: Run the simple demo to understand the flow
-Add Platform Support: Extend config/selectors.yaml for your target SaaS
-Implement AI Features: Add OpenAI API key and test intelligent selectors
-Add Error Handling: Implement retry logic and better error messages
-Create Tests: Write comprehensive tests for your features
-Add Scheduling: Implement automated execution with schedule
-Deploy: Set up cloud deployment for production use
+Add more SaaS platform support
+
+Implement AI-based selector detection with OpenAI
+
+Improve error handling and retry logic
+
+Write additional test cases
+
+Add task scheduling
+
+Prepare for cloud deployment
 
 🚨 Common Issues & Solutions
-Python Interpreter Not Found
-
-Solution: Press Ctrl+Shift+P, select "Python: Select Interpreter", choose ./venv/bin/python
-
-Module Import Errors
-
-Solution: Ensure PYTHONPATH includes your project root
-Check .vscode/settings.json has correct python.analysis.extraPaths
-
-Playwright Installation Issues
-
-Solution: Run playwright install chromium after pip install
-
-Permission Errors
-
-Solution: Run VS Code as administrator (Windows) or check file permissions
-
-Environment Variables Not Loading
-
-Solution: Verify config/credentials.env exists and has correct format
-Check file is not named credentials.env.txt
+Issue	Solution
+Python Interpreter Not Found	Ctrl+Shift+P > Python: Select Interpreter
+Module Import Errors	Ensure PYTHONPATH is correct in settings
+Playwright Installation Issues	Run playwright install chromium
+Permission Errors	Run VS Code as admin or check permissions
+Environment Variables Not Found	Verify config/credentials.env exists
 
 🔐 Security Best Practices
+Never commit config/credentials.env to Git
 
-Never commit config/credentials.env to version control
-Use .gitignore to exclude sensitive files
-Store API keys in environment variables
-Test only on development/staging accounts
-Use separate credentials for different environments
+Add config/credentials.env to .gitignore
+
+Use separate credentials for dev/prod environments
+
+Test automation on development accounts only
+
+📂 Project Structure
+
+saas-automation/
+├── config/
+│   ├── credentials.env
+│   └── selectors.yaml
+├── data/
+│   ├── extracted/
+│   └── logs/
+├── src/
+│   ├── core/
+│   ├── scrapers/
+│   ├── agents/
+│   └── utils/
+├── tests/
+├── .vscode/
+├── venv/
+├── requirements.txt
+└── README.md
+This project will help you build an AI-augmented web automation framework for SaaS platforms using Playwright, LangChain, and Robocorp orchestration.
