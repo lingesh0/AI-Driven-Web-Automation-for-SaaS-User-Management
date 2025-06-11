@@ -1,0 +1,27 @@
+# UI Selectors for different SaaS platforms
+platforms:
+  trello:
+    login:
+      email_field: 'input[name="user"]'
+      password_field: 'input[name="password"]'
+      submit_button: 'input[type="submit"]'
+    user_management:
+      users_table: '.board-members-list'
+      user_row: '.board-member'
+      name_selector: '.board-member-name'
+      email_selector: '.board-member-email'
+      role_selector: '.board-member-role'
+      next_button: '.pagination-next'
+  
+  notion:
+    login:
+      email_field: 'input[type="email"]'
+      password_field: 'input[type="password"]'
+      submit_button: 'button[type="submit"]'
+    user_management:
+      users_table: '.workspace-members'
+      user_row: '.member-row'
+      name_selector: '.member-name'
+      email_selector: '.member-email'
+      role_selector: '.member-role'
+      next_button: '.load-more'
