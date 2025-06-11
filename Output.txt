@@ -1,0 +1,58 @@
+Sample Output: SaaS Automation Project
+
+
+Demo Run Output (Terminal):
+
+Starting SaaS Automation Framework...
+Loaded configurations successfully.
+Target platform: Trello
+Launching browser in headless mode: False
+
+[INFO] Navigating to Trello login page...
+[INFO] Entering username...
+[INFO] Entering password...
+[INFO] Logging in successfully.
+
+[INFO] Navigating to User Management section...
+[INFO] Extracting user data...
+
+Extracted Users:
+--------------------------------------
+Name: Alice Johnson
+Email: alice.johnson@example.com
+Role: Admin
+
+Name: Bob Smith
+Email: bob.smith@example.com
+Role: Member
+
+Name: Charlie Lee
+Email: charlie.lee@example.com
+Role: Viewer
+
+--------------------------------------
+Total Users Extracted: 3
+Data saved to: data/extracted/trello_users_20250611.csv
+
+[INFO] Automation task completed successfully.
+
+
+
+
+
+Sample Extracted CSV (data/extracted/trello_users_20250611.csv:
+
+2025-06-11 10:30:00 - INFO - Starting SaaS Automation Framework
+2025-06-11 10:30:01 - INFO - Loaded configurations successfully
+2025-06-11 10:30:02 - INFO - Launching browser
+2025-06-11 10:30:03 - INFO - Navigating to Trello login page
+2025-06-11 10:30:05 - INFO - Login successful
+2025-06-11 10:30:07 - INFO - Navigating to User Management
+2025-06-11 10:30:10 - INFO - Extracted 3 users
+2025-06-11 10:30:11 - INFO - Data saved to data/extracted/trello_users_20250611.csv
+2025-06-11 10:30:12 - INFO - Automation completed successfully
+
+
+
+
+
